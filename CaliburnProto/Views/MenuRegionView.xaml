@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="CaliburnProto.Views.MenuRegionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" mc:Ignorable="d" 
+             d:DesignHeight="25" d:DesignWidth="300">
+    <Menu Name="MainMenu" Width="Auto" Height="25" ItemsSource="{Binding Items}">
+        <Menu.ItemContainerStyle>
+            <Style TargetType="MenuItem">
+                <Setter Property="Header" Value="{Binding DisplayName}" />
+                <!--<Setter Property="ItemsSource" Value="{Binding Children}" />-->
+                <Setter Property="cal:Message.Attach" Value="[Event Click] = [Action OnClick()]" />
+            </Style>
+        </Menu.ItemContainerStyle>
+    </Menu>
+</UserControl>

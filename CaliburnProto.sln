@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaliburnProto", "CaliburnProto\CaliburnProto.csproj", "{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaliburnProto.Customer", "CaliburnProto.Customer\CaliburnProto.Customer.csproj", "{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaliburnProto.Infrastructure", "CaliburnProto.Infrastructure\CaliburnProto.Infrastructure.csproj", "{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{3149B4D0-7FA4-4FBD-84CB-A54046018421}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{0BDA64A2-DA6F-4EAE-B887-30884AC7D6ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}.Debug|x86.ActiveCfg = Debug|x86
+		{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}.Debug|x86.Build.0 = Debug|x86
+		{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}.Release|Any CPU.ActiveCfg = Release|x86
+		{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}.Release|Mixed Platforms.Build.0 = Release|x86
+		{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}.Release|x86.ActiveCfg = Release|x86
+		{C32FD0E6-DB7E-4694-BA06-BC4B6BAB6362}.Release|x86.Build.0 = Release|x86
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19}.Release|x86.ActiveCfg = Release|Any CPU
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0CDC527D-E91E-48AA-83F0-0CC5E31DA521} = {3149B4D0-7FA4-4FBD-84CB-A54046018421}
+		{B9629EBA-EFC4-4F5A-9A24-015AF9A58D19} = {0BDA64A2-DA6F-4EAE-B887-30884AC7D6ED}
+	EndGlobalSection
+EndGlobal
