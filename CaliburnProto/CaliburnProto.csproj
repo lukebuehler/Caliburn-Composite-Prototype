@@ -36,14 +36,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AvalonDock">
+      <HintPath>..\Lib\AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="AvalonDock.Themes">
+      <HintPath>..\Lib\AvalonDock.Themes.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Micro">
-      <HintPath>..\packages\Caliburn.Micro.1.0.0\lib\Net40\Caliburn.Micro.dll</HintPath>
+      <HintPath>..\Lib\Caliburn.Micro.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity">
-      <HintPath>..\packages\Caliburn.Micro.1.0.0\lib\Net40\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\Lib\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DockAwareWindowManager.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -70,13 +77,14 @@
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="ViewModels\MenuRegionViewModel.cs" />
-    <Compile Include="ViewModels\TabRegionViewModel.cs" />
+    <Compile Include="ViewModels\DockRegionViewModel.cs" />
     <Compile Include="Views\MenuRegionView.xaml.cs">
       <DependentUpon>MenuRegionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TabRegionView.xaml.cs">
-      <DependentUpon>TabRegionView.xaml</DependentUpon>
+    <Compile Include="Views\DockRegionView.xaml.cs">
+      <DependentUpon>DockRegionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WpfExtensions.cs" />
     <Page Include="ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,7 +93,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TabRegionView.xaml">
+    <Page Include="Views\DockRegionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
