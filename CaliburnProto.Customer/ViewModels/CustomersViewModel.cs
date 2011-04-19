@@ -8,23 +8,35 @@ using CaliburnProto.Infrastructure;
 
 namespace CaliburnProto.Customer.ViewModels
 {
-    [Export(typeof(ITabViewModel))]
-    public class CustomersViewModel : Conductor<IScreen>.Collection.OneActive, ITabViewModel
+    [Export(typeof(IDockViewModel))]
+    [Export(typeof(CustomersViewModel))]
+    public class CustomersViewModel : Screen, IDockViewModel
     {
         [ImportingConstructor]
         public CustomersViewModel(IMenuManager menuManger, IDockWindowManager windowManager)
         {
+            DisplayName = "Customers";
+
+            //setup the menu
             menuManger.WithParent("Customer")
+                .ShowItem(new ShowCustomerAction(windowManager))
                 .WithScopeOf(this)
-                .ShowItem(new AddCustomerAction())
-                .ShowItem(new ShowCustomerAction(windowManager));
+                .ShowItem(new AddCustomerAction());
+
         }
 
-        static int count =0;
-        public CustomersViewModel()
+        public void ToggleScreen()
         {
-            this.DisplayName = "Customers" + count;
-            count++;
+            if (IsActive)
+            {
+                var deactivatable = this as IDeactivate;
+                deactivatable.Deactivate(false);
+            }
+            else
+            {
+                var activatable = this as IActivate;
+                activatable.Activate();
+            }
         }
     }
 }

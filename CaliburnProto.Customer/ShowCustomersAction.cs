@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
+using Caliburn.Micro;
 using CaliburnProto.Infrastructure;
 using System.Windows;
 using CaliburnProto.Customer.ViewModels;
@@ -23,7 +24,7 @@ namespace CaliburnProto.Customer
         public override void Execute()
         {
             //MessageBox.Show("Show them all");
-            var customersVM = new CustomersViewModel();
+            var customersVM = IoC.Get<CustomersViewModel>();
             windowManager.ShowDocumentWindow(customersVM, null, false);
         }
     }

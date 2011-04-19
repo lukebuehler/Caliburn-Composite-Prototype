@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 namespace CaliburnProto.ViewModels
 {
     [Export(typeof(IMenuManager))]
+    [Export(typeof(MenuViewModel))]
     public class MenuViewModel : ActionItemManager, IMenuManager
     {
         [ImportingConstructor]

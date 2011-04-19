@@ -8,7 +8,7 @@ using Action = System.Action;
 
 namespace CaliburnProto.Infrastructure
 {
-    public interface IActionItem : IHaveDisplayName
+    public interface IActionItem : IHaveDisplayName, IActivate, IDeactivate
     {
         /// <summary>
         /// Gets or sets the name used internally for grouping and finding the VM. If not set explicitly is the same as <see cref="DisplayName"/>
@@ -32,16 +32,6 @@ namespace CaliburnProto.Infrastructure
         /// The action associated to the ActionItem
         /// </summary>
         void Execute();
-
-        /// <summary>
-        /// Called when the action item scope is activated.
-        /// </summary>
-        void Activate();
-
-        /// <summary>
-        /// Called when the action item scope is deactivated or closed.
-        /// </summary>
-        void Deactivate(bool close);
     }
 
     /// <summary>
@@ -55,7 +45,7 @@ namespace CaliburnProto.Infrastructure
             this.DisplayNameShort = displayName;
             this.Name = displayName;
             this.execute =  (() => { });
-            this.canExecute = (() => true);
+            this.canExecute = (() => IsActive);
         }
 
         /// <summary>
@@ -68,7 +58,7 @@ namespace CaliburnProto.Infrastructure
             :this(displayName)
         {
             this.execute = execute ?? (()=>{});
-            this.canExecute = canExecute ?? (() => true);
+            this.canExecute = canExecute ?? (() => IsActive);
         }
 
         private string name;
@@ -125,22 +115,45 @@ namespace CaliburnProto.Infrastructure
         }
         #endregion
 
+        #region Activation & Deactivation
+        public event EventHandler<ActivationEventArgs> Activated;
+        public event EventHandler<DeactivationEventArgs> AttemptingDeactivation;
+        public event EventHandler<DeactivationEventArgs> Deactivated;
 
-        #region Scope Activation & Deactivation
-        public virtual void Activate()
+        private bool isActive = true;
+        public bool IsActive
         {
-            //by default just force the CanExecute to be revalidated
+            get { return isActive; }
+        }
+
+        public void Activate()
+        {
+            if (IsActive)
+                return;
+
+            isActive = true;
+            OnActivate();
+            if(Activated != null)
+                Activated(this, new ActivationEventArgs {WasInitialized = false});
             NotifyOfPropertyChange(() => CanExecute);
         }
+        protected virtual void OnActivate(){}
 
         public virtual void Deactivate(bool close)
         {
-            //by default just force the CanExecute to be revalidated
+            if(!IsActive)
+                return;
+
+            if (AttemptingDeactivation != null)
+                AttemptingDeactivation(this, new DeactivationEventArgs{WasClosed = close});
+
+            isActive = false;
+            OnDeactivate(close);
             NotifyOfPropertyChange(() => CanExecute);
+            if (Deactivated != null)
+                Deactivated(this, new DeactivationEventArgs{WasClosed = close});
         }
+        protected virtual void OnDeactivate(bool close) { }
         #endregion
-
-
-
     }
 }

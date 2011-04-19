@@ -20,5 +20,7 @@ namespace CaliburnProto.Customer
         {
             MessageBox.Show("Customer created");
         }
+
+
     }
 }

@@ -52,7 +52,7 @@ namespace CaliburnProto
                                      bool selectWhenShown = true,
                                      DockSide dockSide = DockSide.Left)
         {
-            var dockableContent = CreateDockable(viewModel, context);
+            var dockableContent = GetDockable(viewModel, context);
             dockableContent.Show(GetDockingManager(), GetAnchorStyle(dockSide));
             if (selectWhenShown)
                 dockableContent.Activate();
@@ -63,7 +63,7 @@ namespace CaliburnProto
 
         public void ShowFloatingWindow(object viewModel, object context = null, bool selectWhenShown = true)
         {
-            var dockableContent = CreateDockable(viewModel, context);
+            var dockableContent = GetDockable(viewModel, context);
             dockableContent.ShowAsFloatingWindow(GetDockingManager(), true);
             if (selectWhenShown)
                 dockableContent.Activate();
@@ -71,41 +71,48 @@ namespace CaliburnProto
 
         public void ShowDocumentWindow(object viewModel, object context = null, bool selectWhenShown = true)
         {
-            var dockableContent = CreateDockable(viewModel, context);
+            var dockableContent = GetDockable(viewModel, context);
             dockableContent.ShowAsDocument(GetDockingManager());
             if (selectWhenShown)
                 dockableContent.Activate();
         }
 
         /// <summary>
-        ///   Creates the dockable window.
+        /// Gets the dockable window. If it doesnt exist it creates it, otherwise it returns the one with the existing view model.
         /// </summary>
         /// <param name = "rootModel">The root model.</param>
         /// <param name = "context">The context.</param>
         /// <param name = "isDocument">If set to <c>true</c>, the created window will be a document window.</param>
         /// <returns>The dockable window.</returns>
-        private DockableContent CreateDockable(object rootModel,
+        private DockableContent GetDockable(object rootModel,
                                               object context,
                                               bool isDocument = false)
         {
-            var view = EnsureDockableContent(rootModel, ViewLocator.LocateForModel(rootModel, null, context), isDocument);
+            //see if the dockable exists
+            var existingView = GetDockingManager().DockableContents.FirstOrDefault(dc => dc.DataContext == rootModel);
+            if (existingView != null)
+                return existingView;
+
+            var view = ViewLocator.LocateForModel(rootModel, null, context);
             ViewModelBinder.Bind(rootModel, view, context);
-
+            var dockableView = EnsureDockableContent(rootModel, view, isDocument);
+            
+            //set the display name (tab title)
+            dockableView.DataContext = rootModel;
             var haveDisplayName = rootModel as IHaveDisplayName;
-            if (haveDisplayName != null && !ConventionManager.HasBinding(view, DockableContent.TitleProperty))
-                view.SetBinding(DockableContent.TitleProperty, "DisplayName");
+            if (haveDisplayName != null && !ConventionManager.HasBinding(dockableView, DockableContent.TitleProperty))
+                dockableView.SetBinding(DockableContent.TitleProperty, "DisplayName");
 
-            new DockableContentConductor(rootModel, view);
-            return view;
+            new DockableContentConductor(rootModel, dockableView);
+            return dockableView;
         }
         /// <summary>
         /// Ensures that a dockable window is created and properly set-up.
         /// </summary>
-        /// <param name = "viewModel">The view model.</param>
-        /// <param name = "view">The view.</param>
-        /// <param name = "isDocument">If set to <c>true</c>, the dockable window is a document window.</param>
-        /// <returns>The dockable window.</returns>
-        private DockableContent EnsureDockableContent(object viewModel,
+        /// <param name="rootModel">The root model.</param>
+        /// <param name="view">The view.</param>
+        /// <param name="isDocument">If set to <c>true</c>, the dockable window is a document window.</param>
+        private DockableContent EnsureDockableContent(object rootModel,
                                                     object view,
                                                     bool isDocument = false)
         {
@@ -118,15 +125,12 @@ namespace CaliburnProto
                 dockableContent = new DockableContent();
                 dockableContent.Content = view;
                 dockableContent.IsCloseable = true;
-                {
+                dockableContent.HideOnClose = false;
                     
-                    //DockingRules = new DockingRules(true, true, true),
-
-                    //dockableContent.IsCloseable = viewModel.CanClose;
-                    //Image img = new Image();
-                    //img.Source = new BitmapImage(new Uri(@"Resources/Data.png", UriKind.Relative));
-                    //dockableContent.Icon = img.Source;
-                };
+                //dockableContent.IsCloseable = viewModel.CanClose;
+                //Image img = new Image();
+                //img.Source = new BitmapImage(new Uri(@"Resources/Data.png", UriKind.Relative));
+                //dockableContent.Icon = img.Source;
             }
             return dockableContent;
         }
@@ -189,7 +193,7 @@ namespace CaliburnProto
             /// <summary>
             ///   The view.
             /// </summary>
-            private readonly ManagedContent m_View;
+            private readonly DockableContent m_View;
 
             /// <summary>
             ///   The view model.
@@ -217,7 +221,7 @@ namespace CaliburnProto
             /// </summary>
             /// <param name = "viewModel">The view model.</param>
             /// <param name = "view">The view.</param>
-            public DockableContentConductor(object viewModel, ManagedContent view)
+            public DockableContentConductor(object viewModel, DockableContent view)
             {
                 m_ViewModel = viewModel;
                 m_View = view;

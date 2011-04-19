@@ -12,12 +12,12 @@ namespace CaliburnProto.ViewModels
     public class DockViewModel : ViewAware
     {
         IDockWindowManager dockWindowManager;
-        List<ITabViewModel> viewModels;
+        List<IDockViewModel> viewModels;
 
         [ImportingConstructor]
-        public DockViewModel([ImportMany]IEnumerable<ITabViewModel> tabVMs)
+        public DockViewModel([ImportMany]IEnumerable<IDockViewModel> tabVMs)
         {
-            viewModels = new List<ITabViewModel>(tabVMs);
+            viewModels = new List<IDockViewModel>(tabVMs);
         }
         /// <summary>
         ///   Called when an attached view's Loaded event fires.
@@ -27,9 +27,9 @@ namespace CaliburnProto.ViewModels
         {
             base.OnViewLoaded(view);
 
-            var manager = IoC.Get<IDockWindowManager>();
+            dockWindowManager = IoC.Get<IDockWindowManager>();
             foreach (var vm in viewModels)
-                manager.ShowDocumentWindow(vm, null);
+                dockWindowManager.ShowDocumentWindow(vm, null);
         }
 
     }

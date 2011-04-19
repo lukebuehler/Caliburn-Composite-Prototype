@@ -6,7 +6,7 @@ using Caliburn.Micro;
 
 namespace CaliburnProto.Infrastructure
 {
-    public interface ITabViewModel : IScreen
+    public interface IDockViewModel : IScreen
     {
     }
 }
