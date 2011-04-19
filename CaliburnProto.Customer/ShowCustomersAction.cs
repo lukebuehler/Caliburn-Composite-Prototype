@@ -23,7 +23,6 @@ namespace CaliburnProto.Customer
 
         public override void Execute()
         {
-            //MessageBox.Show("Show them all");
             var customersVM = IoC.Get<CustomersViewModel>();
             windowManager.ShowDocumentWindow(customersVM, null, false);
         }

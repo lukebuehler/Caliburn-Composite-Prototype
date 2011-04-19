@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="CaliburnProto.Company.Views.CompaniesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="386" d:DesignWidth="755">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="224*" />
+            <ColumnDefinition Width="531*" />
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="0" x:Name="Items">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <ContentControl Grid.Column="1" x:Name="ActiveItem" Margin="5" />
+    </Grid>
+</UserControl>
