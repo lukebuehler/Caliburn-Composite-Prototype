@@ -18,8 +18,8 @@ using System.ComponentModel.Composition;
 namespace CaliburnProto
 {
     [Export(typeof(IWindowManager))]
-    [Export(typeof(IDockAwareWindowManager))]
-    public class DockAwareWindowManager : WindowManager, IDockAwareWindowManager
+    [Export(typeof(IDockWindowManager))]
+    public class DockAwareWindowManager : WindowManager, IDockWindowManager
     {
         Window m_MainWindow;
         DockingManager m_DockingManager;
@@ -48,33 +48,33 @@ namespace CaliburnProto
         /// <param name = "selectWhenShown">If set to <c>true</c> the window will be selected when shown.</param>
         /// <param name = "dockSide">The dock side.</param>
         public void ShowDockedWindow(object viewModel,
-                                     object context,
+                                     object context = null,
                                      bool selectWhenShown = true,
                                      DockSide dockSide = DockSide.Left)
         {
-            var dockableWindow = CreateDockable(viewModel, context);
-            dockableWindow.Show(GetDockingManager(), GetAnchorStyle(dockSide));
+            var dockableContent = CreateDockable(viewModel, context);
+            dockableContent.Show(GetDockingManager(), GetAnchorStyle(dockSide));
             if (selectWhenShown)
-                dockableWindow.Activate();
+                dockableContent.Activate();
             else
-                dockableWindow.ToggleAutoHide();
+                dockableContent.ToggleAutoHide();
         }
 
 
-        public void ShowFloatingWindow(object viewModel, object context, bool selectWhenShown = true)
+        public void ShowFloatingWindow(object viewModel, object context = null, bool selectWhenShown = true)
         {
-            var dockableWindow = CreateDockable(viewModel, context);
-            dockableWindow.ShowAsFloatingWindow(GetDockingManager(), true);
+            var dockableContent = CreateDockable(viewModel, context);
+            dockableContent.ShowAsFloatingWindow(GetDockingManager(), true);
             if (selectWhenShown)
-                dockableWindow.Activate();
+                dockableContent.Activate();
         }
 
-        public void ShowDocumentWindow(object viewModel, object context, bool selectWhenShown = true)
+        public void ShowDocumentWindow(object viewModel, object context = null, bool selectWhenShown = true)
         {
-            var dockableWindow = CreateDockable(viewModel, context);
-            dockableWindow.ShowAsDocument(GetDockingManager());
+            var dockableContent = CreateDockable(viewModel, context);
+            dockableContent.ShowAsDocument(GetDockingManager());
             if (selectWhenShown)
-                dockableWindow.Activate();
+                dockableContent.Activate();
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace CaliburnProto
             if (haveDisplayName != null && !ConventionManager.HasBinding(view, DockableContent.TitleProperty))
                 view.SetBinding(DockableContent.TitleProperty, "DisplayName");
 
-            new DockableWindowConductor(rootModel, view);
+            new DockableContentConductor(rootModel, view);
             return view;
         }
         /// <summary>
@@ -112,6 +112,7 @@ namespace CaliburnProto
             //const WindowCloseMethod closeMethod = WindowCloseMethod.Detach; //The window is destroyed once closed...
             var dockableContent = view as DockableContent;
 
+            var d = new DocumentContent();
             if (dockableContent == null)
             {
                 dockableContent = new DockableContent();
@@ -182,7 +183,7 @@ namespace CaliburnProto
         /// <summary>
         ///   The dockable window conductor, used to allow for interaction between view and view model.
         /// </summary>
-        private class DockableWindowConductor
+        private class DockableContentConductor
         {
             #region Fields
             /// <summary>
@@ -212,11 +213,11 @@ namespace CaliburnProto
             #endregion
 
             /// <summary>
-            ///   Initializes a new instance of the <see cref = "DockableWindowConductor" /> class.
+            ///   Initializes a new instance of the <see cref = "DockableContentConductor" /> class.
             /// </summary>
             /// <param name = "viewModel">The view model.</param>
             /// <param name = "view">The view.</param>
-            public DockableWindowConductor(object viewModel, ManagedContent view)
+            public DockableContentConductor(object viewModel, ManagedContent view)
             {
                 m_ViewModel = viewModel;
                 m_View = view;

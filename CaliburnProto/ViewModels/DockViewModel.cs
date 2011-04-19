@@ -9,13 +9,13 @@ using CaliburnProto.Infrastructure;
 namespace CaliburnProto.ViewModels
 {
     [Export]
-    public class DockRegionViewModel : Conductor<IScreen>.Collection.AllActive
+    public class DockViewModel : ViewAware
     {
-        IDockAwareWindowManager dockWindowManager;
+        IDockWindowManager dockWindowManager;
         List<ITabViewModel> viewModels;
 
         [ImportingConstructor]
-        public DockRegionViewModel([ImportMany]IEnumerable<ITabViewModel> tabVMs)
+        public DockViewModel([ImportMany]IEnumerable<ITabViewModel> tabVMs)
         {
             viewModels = new List<ITabViewModel>(tabVMs);
         }
@@ -27,7 +27,7 @@ namespace CaliburnProto.ViewModels
         {
             base.OnViewLoaded(view);
 
-            var manager = IoC.Get<IDockAwareWindowManager>();
+            var manager = IoC.Get<IDockWindowManager>();
             foreach (var vm in viewModels)
                 manager.ShowDocumentWindow(vm, null);
         }

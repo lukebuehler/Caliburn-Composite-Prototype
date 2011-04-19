@@ -18,7 +18,7 @@ namespace CaliburnProto.Infrastructure
         Bottom
     }
 
-    public interface IDockAwareWindowManager : IWindowManager
+    public interface IDockWindowManager : IWindowManager
     {
         /// <summary>
         /// Shows a docked window.
@@ -28,7 +28,7 @@ namespace CaliburnProto.Infrastructure
         /// <param name="selectWhenShown">If set to <c>true</c> the window will be selected when shown.</param>
         /// <param name = "dockSide">The dock side (Left, Right, Top, Bottom).</param>
         void ShowDockedWindow(object viewModel,
-                              object context,
+                              object context = null,
                               bool selectWhenShown = true,
                               DockSide dockSide = DockSide.Left);
 
@@ -39,7 +39,7 @@ namespace CaliburnProto.Infrastructure
         /// <param name = "context">The context.</param>
         /// <param name="selectWhenShown">If set to <c>true</c> the window will be selected when shown.</param>
         void ShowFloatingWindow(object viewModel,
-                                object context,
+                                object context = null,
                                 bool selectWhenShown = true);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace CaliburnProto.Infrastructure
         /// <param name = "context">The context.</param>
         /// <param name="selectWhenShown">If set to <c>true</c> the window will be selected when shown.</param>
         void ShowDocumentWindow(object viewModel,
-                                object context,
+                                object context = null,
                                 bool selectWhenShown = true);
     }
 }

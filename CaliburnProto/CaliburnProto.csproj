@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="AvalonDock">
       <HintPath>..\Lib\AvalonDock.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="AvalonDock.Themes">
       <HintPath>..\Lib\AvalonDock.Themes.dll</HintPath>
@@ -68,7 +69,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DockAwareWindowManager.cs" />
+    <Compile Include="Framework\ActionItemManager.cs" />
+    <Compile Include="Framework\DockWindowManager.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -76,24 +78,24 @@
     </Compile>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="IShell.cs" />
-    <Compile Include="ViewModels\MenuRegionViewModel.cs" />
-    <Compile Include="ViewModels\DockRegionViewModel.cs" />
-    <Compile Include="Views\MenuRegionView.xaml.cs">
-      <DependentUpon>MenuRegionView.xaml</DependentUpon>
+    <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\DockViewModel.cs" />
+    <Compile Include="Views\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DockRegionView.xaml.cs">
-      <DependentUpon>DockRegionView.xaml</DependentUpon>
+    <Compile Include="Views\DockView.xaml.cs">
+      <DependentUpon>DockView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WpfExtensions.cs" />
+    <Compile Include="Framework\WpfExtensions.cs" />
     <Page Include="ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MenuRegionView.xaml">
+    <Page Include="Views\MenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DockRegionView.xaml">
+    <Page Include="Views\DockView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,6 +131,7 @@
       <Name>CaliburnProto.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

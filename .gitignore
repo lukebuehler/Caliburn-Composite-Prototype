@@ -15,6 +15,7 @@
 *_p.c
 *.ncb
 *.suo
+*.gpState
 *.tlb
 *.tlh
 *.bak

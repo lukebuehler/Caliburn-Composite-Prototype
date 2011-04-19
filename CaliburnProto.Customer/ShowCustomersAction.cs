@@ -9,21 +9,18 @@ using CaliburnProto.Customer.ViewModels;
 
 namespace CaliburnProto.Customer
 {
-    [Export(typeof(IMenuItemViewModel))]
-    public class ShowCustomerViewModel : IMenuItemViewModel
+    //[Export(typeof(IActionItem))]
+    public class ShowCustomerAction : ActionItem
     {
-        IDockAwareWindowManager windowManager;
+        IDockWindowManager windowManager;
 
         [ImportingConstructor]
-        public ShowCustomerViewModel(IDockAwareWindowManager windowManager)
+        public ShowCustomerAction(IDockWindowManager windowManager) : base("Show Customers")
         {
-            DisplayName = "Show Customers";
             this.windowManager = windowManager;
         }
 
-        public string DisplayName { get; set; }
-
-        public void OnClick()
+        public override void Execute()
         {
             //MessageBox.Show("Show them all");
             var customersVM = new CustomersViewModel();

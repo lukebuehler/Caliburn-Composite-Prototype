@@ -8,17 +8,15 @@ using System.Windows;
 
 namespace CaliburnProto.Customer
 {
-    [Export(typeof(IMenuItemViewModel))]
-    public class AddCustomerViewModel : IMenuItemViewModel
+    //[Export(typeof(IActionItem))]
+    public class AddCustomerAction : ActionItem
     {
-        public AddCustomerViewModel()
+        public AddCustomerAction()
+            : base("AddCustomer")
         {
-            DisplayName = "AddCustomer";
         }
 
-        public string DisplayName { get; set; }
-
-        public void OnClick()
+        public override void Execute()
         {
             MessageBox.Show("Customer created");
         }

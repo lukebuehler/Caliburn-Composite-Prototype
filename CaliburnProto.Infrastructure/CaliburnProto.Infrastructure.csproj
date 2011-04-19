@@ -47,8 +47,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDockAwareWindowManager.cs" />
-    <Compile Include="IMenuItemViewModel.cs" />
+    <Compile Include="ActionItem.cs" />
+    <Compile Include="IActionItemManager.cs" />
+    <Compile Include="IDockWindowManager.cs" />
     <Compile Include="ITabViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

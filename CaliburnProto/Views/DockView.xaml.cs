@@ -17,9 +17,9 @@ namespace CaliburnProto.Views
     /// <summary>
     /// Interaction logic for TabRegionView.xaml
     /// </summary>
-    public partial class DockRegionView : UserControl
+    public partial class DockView : UserControl
     {
-        public DockRegionView()
+        public DockView()
         {
             InitializeComponent();
         }
