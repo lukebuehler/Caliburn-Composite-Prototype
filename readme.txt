@@ -1,3 +1,8 @@
+Note: This project is out of date. 
+I'm keeping it here as a reference, for a really good example of a composite application in Caliburn.Micro take a look at Gemini:
+https://github.com/tgjones/gemini
+
+===============================================
 This is a small prototype to see how a PRISM like composite application could be done only with Caliburn.Micro.
 
 The libraries were installed with NuGet.
